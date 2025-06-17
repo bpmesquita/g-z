@@ -1,1 +1,1 @@
-# gemini-zabbix
+# g-z
