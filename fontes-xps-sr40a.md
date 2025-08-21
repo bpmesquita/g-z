@@ -20,8 +20,8 @@
 -   `(`descarga.bat`, Falha AC / Baterias em Descarga)`: Perda total da energia da concessionária (AC). O site está operando 100% em baterias.
 **Diagnóstico:**
 1.  Confirmar imediatamente o status de energia de outros equipamentos no local.
-2.  Verificar remotamente os parâmetros de tensão de entrada (Itens: `rectifierInputVoltage1`, `rectifierInputVoltage2`) na controladora da fonte, se acessível.
-3.  Observar o item `autonomia` para estimar o tempo restante de operação em baterias.
+2.  Verificar remotamente os parâmetros de tensão de entrada na controladora da fonte, se acessível.
+3.  Observar o item `Autonomia do Banco de Baterias` no Zabbix, para estimar o tempo restante de operação em baterias.
 **Ação:**
 -   **AÇÃO CRÍTICA E IMEDIATA:** Acionar o procedimento padrão de queda de energia, acionando a **Equipe de Telecom**.
 -   Notificar a concessionária sobre a falha ou instabilidade da rede elétrica.
