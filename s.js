@@ -95,20 +95,26 @@ function extractProcedureFromKB(kb_content, item_key) {
 
     // Cria uma Expressão Regular que busca pelo item_key como uma palavra inteira.
     // \b é uma "fronteira de palavra", garantindo que "carga.bat" não corresponda a "descarga.bat".
-    var search_regex = new RegExp('\\b' + escaped_item_key + '\\b');
+    var search_regex = new RegExp('`' + escaped_item_key + '`');
     
     var sections = kb_content.split('---');
     
     for (var i = 0; i < sections.length; i++) {
-        var section = sections[i];
-        
-        // Usa o método test() do Regex, que é muito mais preciso que indexOf().
-        if (search_regex.test(section)) {
-            Zabbix.log(4, '[ Webhook Gemini ] Procedimento encontrado para o item "' + item_key + '" usando busca precisa.');
-            return section.trim();
+        var section = sections[i].trim();
+        if (!section) {
+            continue;
+        }
+
+        // Pega apenas a primeira linha da seção, que é o título
+        var first_line = section.substring(0, section.indexOf('\n'));
+
+        // Testa o Regex apenas contra a linha do título
+        if (search_regex.test(first_line)) {
+            Zabbix.log(4, '[ Webhook Gemini ] Procedimento encontrado para o item "' + item_key + '" no título: ' + first_line);
+            return section;
         }
     }
-    
+
     Zabbix.log(3, '[ Webhook Gemini ] Procedimento para o item "' + item_key + '" NÃO foi encontrado no manual.');
     return null;
 }
