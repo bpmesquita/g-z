@@ -15,10 +15,9 @@
 -   Se a rede estiver OK, a controladora pode precisar de um reset físico. Acionar **Equipe de Telecom**.
 
 ---
-### Alerta: Falha de Energia AC / Baterias em Descarga (Itens: `descarga.bat`, `ac.anormal`, `battery1Current`, `rectifierInputVoltage1`, `rectifierInputVoltage2`, `autonomia`)
+### Alerta: Falha de Energia AC / Baterias em Descarga (Itens: `descarga.bat`, `battery1Current`, `rectifierInputVoltage1`, `rectifierInputVoltage2`, `autonomia`)
 **Causa Provável:**
 -   `(`descarga.bat`, Falha AC / Baterias em Descarga)`: Perda total da energia da concessionária (AC). O site está operando 100% em baterias.
--   `(`ac.anormal`, Tensão AC Baixa UR)`: A tensão da concessionária está presente, mas fora dos limites seguros (muito alta ou muito baixa), com risco de danificar os retificadores.
 **Diagnóstico:**
 1.  Confirmar imediatamente o status de energia de outros equipamentos no local.
 2.  Verificar remotamente os parâmetros de tensão de entrada (Itens: `rectifierInputVoltage1`, `rectifierInputVoltage2`) na controladora da fonte, se acessível.
@@ -27,6 +26,36 @@
 -   **AÇÃO CRÍTICA E IMEDIATA:** Acionar o procedimento padrão de queda de energia, acionando a **Equipe de Telecom**.
 -   Notificar a concessionária sobre a falha ou instabilidade da rede elétrica.
 -   Preparar para o desligamento controlado do site se a energia não for restabelecida a tempo.
+
+---
+### Alerta: Tensão AC Anormal (Item: `ac.anormal`)
+
+**Causa Provável:**
+*   Tensão da concessionária fora dos limites seguros, podendo danificar os retificadores.
+*   Falha em uma ou mais fases da rede elétrica de entrada.
+
+**Diagnóstico:**
+1.  Confirmar o status de energia de outros equipamentos no local.
+2.  Verificar remotamente a tensão de entrada dos retificadores (Itens: `rectifierInputVoltage1`, `rectifierInputVoltage2`) na controladora da fonte, se acessível.
+
+**Ação:**
+*   **AÇÃO IMEDIATA:** Acionar a **Equipe de Telecom** para investigar a instabilidade da rede elétrica.
+*   Notificar a concessionária sobre a instabilidade da rede.
+*   Monitorar a fonte para garantir que ela não entre em modo de descarga de bateria.
+
+---
+### Informativo: Baterias em Descarga (Item: `descarga.bat`)
+
+**Causa Provável:**
+*   **Perda Total de Energia AC:** O site está operando 100% em baterias.
+
+**Diagnóstico:**
+1.  Monitorar o tempo restante de operação em baterias (Item: `autonomia`).
+2.  Verificar se há um gerador no local e se ele foi acionado.
+
+**Ação:**
+*   **CRÍTICO E IMEDIATO:** Acionar o procedimento padrão de queda de energia e acionar a **Equipe de Telecom**.
+*   Preparar para o desligamento controlado do site se a energia não for restabelecida a tempo.
 
 ---
 ### Alerta: Tensão da Bateria Baixa (Itens: `usccUltimateVBate`, `battery1Voltage`)
